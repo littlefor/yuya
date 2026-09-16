@@ -1,0 +1,45 @@
+<view class="page">
+  <view class="kicker">Daily quest</view>
+  <view class="h1">每日打卡训练</view>
+
+  <view class="card" wx:if="{{completed}}">
+    <view class="h1">今日已打卡</view>
+    <view>获得 {{session.xpEarned}} XP。明天会看到昨天的错词。</view>
+    <view wx:if="{{msg}}">{{msg}}</view>
+    <button class="btn moss" bindtap="goReview">去复习队列</button>
+  </view>
+
+  <view class="card" wx:elif="{{!session}}">
+    <view class="muted">选择今天的学习时长。内容会混合新词、复习、发音和语法。</view>
+    <view class="chips">
+      <button wx:for="{{minuteOptions}}" wx:key="*this" class="btn {{minutes === item ? 'moss' : 'ghost'}}" data-m="{{item}}" bindtap="setMinutes">{{item}} 分钟</button>
+    </view>
+    <button class="btn" bindtap="start">生成今日任务</button>
+  </view>
+
+  <block wx:else>
+    <view class="card">
+      <view class="timer">{{clock}}</view>
+      <view class="muted">已完成 {{done}}/{{total}}</view>
+      <button class="btn ghost" bindtap="finish">提前打卡</button>
+    </view>
+    <view class="card" wx:if="{{current.type === 'word'}}">
+      <view class="muted">{{current.payload.reason === 'review' ? '复习' : '新词'}}</view>
+      <view class="emoji">{{current.payload.emoji}}</view>
+      <view class="lemma">{{current.payload.lemma}}</view>
+      <button class="btn ghost" data-text="{{current.payload.lemma}}" bindtap="play">听发音</button>
+      <button wx:for="{{current.payload.options}}" wx:key="*this" class="option" data-opt="{{item}}" bindtap="submitWord">{{item}}</button>
+    </view>
+    <view class="card" wx:elif="{{current.type === 'grammar' || current.type === 'scenario'}}">
+      <view class="kicker">{{current.payload.title}}</view>
+      <view class="h1" style="font-size: 34rpx;">{{current.payload.question}}</view>
+      <button wx:for="{{current.payload.options}}" wx:key="*this" class="option" data-opt="{{item}}" bindtap="submitChoice">{{item}}</button>
+    </view>
+    <view class="card" wx:elif="{{current.type === 'pronounce'}}">
+      <view class="lemma">{{current.payload.lemma}}</view>
+      <view>{{current.payload.ipa}} · {{current.payload.meaning}}</view>
+      <button class="btn ghost" data-text="{{current.payload.lemma}}" bindtap="play">听标准音</button>
+      <button class="btn moss" bindtap="markPronounce">我跟读完了</button>
+    </view>
+  </block>
+</view>

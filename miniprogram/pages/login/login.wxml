@@ -1,0 +1,37 @@
+<view class="page auth">
+  <view class="brand-mark">芽</view>
+  <view class="kicker">语路相伴</view>
+  <view class="h1">一路有伴，把英语走通</view>
+  <view class="muted">分类记忆、场景开口、语法练习、每日打卡。先从今天的 15 分钟开始。</view>
+  <view class="card auth-card">
+    <view class="field">
+      <text class="field-label">邮箱</text>
+      <input
+        class="field-input"
+        type="text"
+        value="{{email}}"
+        bindinput="onEmail"
+        placeholder="请输入邮箱"
+        placeholder-class="field-ph"
+        confirm-type="next"
+      />
+    </view>
+    <view class="field">
+      <text class="field-label">密码</text>
+      <input
+        class="field-input"
+        password
+        value="{{password}}"
+        bindinput="onPassword"
+        placeholder="请输入密码"
+        placeholder-class="field-ph"
+        confirm-type="done"
+        bindconfirm="onLogin"
+      />
+    </view>
+    <view wx:if="{{error}}" class="form-error">{{error}}</view>
+    <button class="btn moss" bindtap="onLogin" loading="{{loading}}">进入学习</button>
+    <view class="muted auth-link" bindtap="goRegister">还没有账号？去注册</view>
+    <view class="muted">体验账号已填好：demo@linguaseed.app / demo123</view>
+  </view>
+</view>

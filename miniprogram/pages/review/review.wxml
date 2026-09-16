@@ -1,0 +1,24 @@
+<view class="page">
+  <view class="card" wx:if="{{empty}}">
+    <view class="h1">今天没有待复习的词了</view>
+    <view class="muted">到期 {{queue.dueCount}} · 昨天错过 {{queue.yesterdayMissed}}</view>
+    <button class="btn moss" bindtap="goDaily">去做每日训练</button>
+  </view>
+  <view class="card" wx:elif="{{word}}">
+    <view class="muted">{{word.reason === 'yesterday' ? '来自昨天的错题' : '间隔重复到期'}} · {{index + 1}}/{{queue.words.length}}</view>
+    <view class="emoji">{{word.emoji}}</view>
+    <block wx:if="{{show}}">
+      <view class="lemma">{{word.lemma}}</view>
+      <view>{{word.meaning}}</view>
+      <view class="muted">{{word.ipa}} · {{word.example}}</view>
+      <button class="btn ghost" bindtap="play">听发音</button>
+      <view class="chips">
+        <button class="btn warn" data-result="unknown" bindtap="rate">不认识</button>
+        <button class="btn ghost" data-result="fuzzy" bindtap="rate">模糊</button>
+        <button class="btn moss" data-result="known" bindtap="rate">认识</button>
+      </view>
+    </block>
+    <button wx:else class="btn moss" bindtap="reveal">显示词义</button>
+  </view>
+  <view class="empty" wx:else>加载中…</view>
+</view>

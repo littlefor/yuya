@@ -1,0 +1,26 @@
+<view class="page">
+  <view class="card" wx:if="{{error}}">
+    <view>{{error}}</view>
+    <button class="btn" bindtap="back">返回</button>
+  </view>
+  <view class="card" wx:elif="{{result}}">
+    <view class="kicker">{{result.passed ? '通过' : '再练一轮'}}</view>
+    <view class="stat">{{result.score}}</view>
+    <view>及格线 {{result.passScore}}。{{result.passed ? '下一阶段已解锁。' : '建议先把错题对应分类再过一遍。'}}</view>
+    <view class="card" wx:for="{{wrong}}" wx:key="index">
+      <view>{{item.prompt}}</view>
+      <view>你的答案：{{item.yoursText}}</view>
+      <view>正确：{{item.answerText}}</view>
+      <view class="muted">{{item.explain}}</view>
+    </view>
+    <button class="btn moss" bindtap="back">返回关卡</button>
+    <button class="btn ghost" bindtap="retry">再测一次</button>
+  </view>
+  <view class="card" wx:elif="{{q}}">
+    <view class="muted">{{test.title}} · {{index + 1}}/{{test.questions.length}} · {{q.type}}</view>
+    <view class="h1" style="font-size: 36rpx;">{{q.prompt}}</view>
+    <button wx:if="{{q.audioText}}" class="btn ghost" bindtap="playAudio">播放听力</button>
+    <button wx:for="{{q.options}}" wx:for-index="oi" wx:key="*this" class="option" data-oi="{{oi}}" bindtap="choose">{{item}}</button>
+  </view>
+  <view class="empty" wx:else>加载中…</view>
+</view>

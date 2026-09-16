@@ -1,0 +1,2 @@
+.emoji { font-size: 64rpx; }
+button { margin: 16rpx 0 24rpx; }

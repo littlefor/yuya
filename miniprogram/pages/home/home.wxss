@@ -1,0 +1,10 @@
+.hero { justify-content: space-between; align-items: flex-start; }
+.hero-copy { flex: 1; min-width: 0; padding-right: 16rpx; }
+.level-chip { margin-top: 8rpx; }
+.stats { display: flex; justify-content: space-between; margin-top: 28rpx; }
+.path { display: flex; gap: 12rpx; margin: 16rpx 0 20rpx; }
+.stage { padding: 8rpx 18rpx; border-radius: 999rpx; background: #fff; color: #5b675f; }
+.stage.now { background: #1e6b48; color: #fff; }
+.stage.done { background: #e8f6ee; color: #1e6b48; }
+.title { font-weight: 700; margin: 8rpx 0; }
+button { margin: 0; }

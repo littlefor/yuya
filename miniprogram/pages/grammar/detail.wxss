@@ -1,0 +1,2 @@
+.lemma { font-size: 32rpx; font-weight: 700; }
+button { margin-top: 8rpx; }

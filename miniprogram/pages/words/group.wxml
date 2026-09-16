@@ -1,0 +1,30 @@
+<view class="page">
+  <view class="h1">{{meta.name || slug}}</view>
+  <view class="muted">{{meta.description}} 本组 {{words.length}} 个词。</view>
+  <view class="chips">
+    <button class="btn moss" bindtap="startStudy">开始记这组</button>
+    <button class="btn ghost" bindtap="speakActive" wx:if="{{active}}">听发音</button>
+  </view>
+  <scroll-view scroll-y class="sheet">
+    <view
+      wx:for="{{words}}"
+      wx:key="_id"
+      class="word-row {{active._id === item._id ? 'on' : ''}}"
+      data-id="{{item._id}}"
+      bindtap="pick"
+    >
+      <text class="ico">{{item.emoji}}</text>
+      <text class="zh">{{item.meaning}}</text>
+      <view class="en">
+        <text class="lemma">{{item.lemma}}</text>
+        <text class="muted">{{item.ipa}}</text>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="card" wx:if="{{active}}">
+    <view class="kicker">{{active.examLevel}} · {{active.clusterName}}</view>
+    <view class="lemma">{{active.lemma}}</view>
+    <view>{{active.meaning}}</view>
+    <view class="muted">{{active.example}} — {{active.exampleZh}}</view>
+  </view>
+</view>

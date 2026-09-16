@@ -1,0 +1,12 @@
+<view class="page" wx:if="{{root}}">
+  <view class="emoji">{{root.emoji}}</view>
+  <view class="h1">{{root.affix}} · {{root.meaning}}</view>
+  <view class="muted">{{root.tip || root.description}}</view>
+  <button class="btn moss" bindtap="study">开始记这组</button>
+  <view class="card" wx:for="{{root.examples}}" wx:key="lemma" data-text="{{item.lemma}}" bindtap="play">
+    <view class="lemma">{{item.emoji}} {{item.lemma}}</view>
+    <view>{{item.meaning}}</view>
+    <view class="muted">{{item.ipa}} · {{item.breakdown}}</view>
+  </view>
+</view>
+<view class="empty" wx:else>加载中…</view>

@@ -1,0 +1,13 @@
+<view class="page" wx:if="{{word}}">
+  <view class="kicker">Pronunciation</view>
+  <view class="lemma">{{word.lemma}}</view>
+  <view>{{word.ipa}} · {{word.meaning}}</view>
+  <view class="muted">{{word.example}}</view>
+  <button class="btn moss" bindtap="playWord">听标准发音</button>
+  <button class="btn ghost" bindtap="playExample">听例句</button>
+  <view class="card">
+    <view class="muted">小程序里请先听标准音，再对照音标跟读。专业评测可后续接入语音插件。</view>
+    <button class="btn" bindtap="next">下一个</button>
+  </view>
+</view>
+<view class="empty" wx:else>加载中…</view>

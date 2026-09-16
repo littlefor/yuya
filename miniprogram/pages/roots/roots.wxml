@@ -1,0 +1,13 @@
+<view class="page">
+  <view class="h1">词根词缀脑图</view>
+  <view class="muted">共 {{data.total || 0}} 条。点进去看例词。</view>
+  <view wx:for="{{data.families}}" wx:key="type" class="card">
+    <view class="kicker">{{item.emoji}} {{item.name}}</view>
+    <view wx:for="{{item.groups}}" wx:for-item="group" wx:key="slug">
+      <view class="muted" style="margin: 12rpx 0;">{{group.name}}</view>
+      <view class="chips">
+        <view class="chip" wx:for="{{group.roots}}" wx:for-item="root" wx:key="slug" data-slug="{{root.slug}}" bindtap="open">{{root.emoji}} {{root.affix || root.slug}}</view>
+      </view>
+    </view>
+  </view>
+</view>

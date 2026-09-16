@@ -1,0 +1,3 @@
+.stats { display: flex; justify-content: space-between; margin-top: 20rpx; }
+.cell { margin-bottom: 12rpx; }
+button { margin-top: 24rpx; }

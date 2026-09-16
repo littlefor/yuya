@@ -1,0 +1,2 @@
+button { margin-top: 12rpx; }
+.stat { font-size: 80rpx; text-align: center; }

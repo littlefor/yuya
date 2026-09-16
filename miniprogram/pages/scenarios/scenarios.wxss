@@ -1,0 +1,2 @@
+.title { font-weight: 700; margin: 8rpx 0; }
+button.btn { margin: 0; }

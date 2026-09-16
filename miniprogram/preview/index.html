@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>语芽小程序部署包</title>
+  <style>
+    :root { color-scheme: light; }
+    body {
+      margin: 0; font-family: "PingFang SC", "Noto Sans SC", sans-serif;
+      background: linear-gradient(180deg, #f3ebdd, #efe4d2); color: #1a261c;
+    }
+    main { max-width: 720px; margin: 0 auto; padding: 40px 20px 80px; }
+    .card {
+      background: rgba(255,251,244,.92); border-radius: 24px; padding: 28px;
+      box-shadow: 0 18px 40px rgba(48,36,18,.12);
+    }
+    a.btn {
+      display: inline-block; margin: 8px 8px 0 0; padding: 10px 16px; border-radius: 999px;
+      background: #1e6b48; color: #fff; text-decoration: none;
+    }
+    a.ghost { background: transparent; color: #1a261c; border: 1px solid rgba(26,38,28,.15); }
+    code { background: #fff; padding: 2px 6px; border-radius: 6px; }
+    ol { line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <main>
+    <p style="letter-spacing:.12em;color:#1e6b48;text-transform:uppercase;">WeChat Mini Program</p>
+    <h1>语芽小程序已打包</h1>
+    <div class="card">
+      <p>微信小程序不能像网页那样跑在浏览器里，需要用<strong>微信开发者工具</strong>导入源码。Docker 负责注入接口地址并生成可下载的代码包。</p>
+      <p>当前接口地址：<code>__API_BASE__</code></p>
+      <p>
+        <a class="btn" href="/linguaseed-miniprogram.zip">下载小程序代码包</a>
+        <a class="btn ghost" href="http://localhost:8080">打开 PC 网页版</a>
+      </p>
+      <h3>导入步骤（官方开发者工具）</h3>
+      <ol>
+        <li>安装并打开 <a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html">微信开发者工具</a>。</li>
+        <li>选择「小程序」，导入项目目录 <code>miniprogram/</code>（或解压上面的 zip）。</li>
+        <li>AppID 可先用测试号 / <code>touristappid</code>；正式上线再换成你的 AppID。</li>
+        <li>详情 → 本地设置：勾选「不校验合法域名、web-view、TLS 版本以及 HTTPS 证书」。</li>
+        <li>确保 Docker 栈已启动，PC 端 <code>http://localhost:8080</code> 能打开，小程序才会请求到同一套 API。</li>
+        <li>体验账号：<code>demo@linguaseed.app</code> / <code>demo123</code></li>
+      </ol>
+      <h3>正式发布</h3>
+      <ol>
+        <li>在微信公众平台注册小程序，拿到 AppID，写入 <code>project.config.json</code>。</li>
+        <li>把后端放到 HTTPS 域名，并在公众平台配置 request 合法域名。</li>
+        <li>发音走有道词典音频，正式环境还需配置 downloadFile / 音频合法域名 <code>dict.youdao.com</code>。</li>
+        <li>开发者工具上传代码 → 提交审核。</li>
+      </ol>
+      <p>官方文档：<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/">小程序开发指南</a></p>
+    </div>
+  </main>
+</body>
+</html>

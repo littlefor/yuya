@@ -1,0 +1,34 @@
+<view class="page" wx:if="{{item}}">
+  <view class="kicker">{{item.stage}} · {{item.place}}</view>
+  <view class="h1">{{item.emoji}} {{item.title}}</view>
+  <view class="muted">{{item.description}}</view>
+  <view class="card" wx:for="{{item.usefulPhrases}}" wx:key="en">
+    <view class="lemma">{{item.en}}</view>
+    <view class="muted">{{item.ipa}}</view>
+    <view>{{item.zh}}</view>
+    <button class="btn ghost" data-text="{{item.en}}" bindtap="play">听这句</button>
+  </view>
+  <view class="h1" style="font-size: 34rpx;">情景对话 · {{item.dialogue.length}} 句</view>
+  <view wx:for="{{item.dialogue}}" wx:for-index="idx" wx:key="idx" class="bubble {{item.speaker === 'You' ? 'you' : ''}}">
+    <view class="muted">{{item.speaker}}</view>
+    <view>{{item.en}}</view>
+    <view>{{item.zh}}</view>
+    <button class="btn ghost" data-text="{{item.en}}" bindtap="play">听这句</button>
+  </view>
+  <view class="h1" style="font-size: 34rpx;">场景小测 · {{item.quizzes.length}} 题</view>
+  <view class="muted" wx:if="{{finished}}">本次答对 {{correct}} / {{item.quizzes.length}}</view>
+  <view class="card" wx:for="{{item.quizzes}}" wx:for-index="qi" wx:key="question">
+    <view>{{item.question}}</view>
+    <button
+      wx:for="{{item.displayOptions}}"
+      wx:for-item="opt"
+      wx:key="text"
+      class="option {{opt.klass}}"
+      data-qi="{{qi}}"
+      data-oi="{{opt.oi}}"
+      bindtap="choose"
+    >{{opt.text}}</button>
+    <view class="muted" wx:if="{{item.explained}}">{{item.explain}}</view>
+  </view>
+</view>
+<view class="empty" wx:else>加载中…</view>

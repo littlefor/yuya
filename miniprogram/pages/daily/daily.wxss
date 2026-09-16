@@ -1,0 +1,3 @@
+.timer { font-size: 64rpx; font-weight: 700; }
+.emoji { font-size: 64rpx; }
+button { margin-top: 8rpx; }

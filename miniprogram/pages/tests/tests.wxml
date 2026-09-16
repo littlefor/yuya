@@ -1,0 +1,11 @@
+<view class="page">
+  <view class="h1">每个阶段结束，测一测</view>
+  <view class="muted">通过后解锁下一阶段。A1 → A2 → B1 → B2。</view>
+  <view class="card" wx:for="{{tests}}" wx:key="level">
+    <view class="h1" style="font-size: 36rpx;">{{item.title}}</view>
+    <view class="muted">{{item.description}}</view>
+    <view>{{item.questionCount}} 题 · 及格 {{item.passScore}} · 最高 {{item.bestScore || 0}}</view>
+    <button wx:if="{{item.unlocked}}" class="btn moss" data-level="{{item.level}}" bindtap="start">开始测试</button>
+    <button wx:else class="btn ghost" disabled>先完成前一阶段</button>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+page { background: #f3ebdd; }
+.form-error {
+  color: #d3542f;
+  font-size: 24rpx;
+  margin-bottom: 16rpx;
+}

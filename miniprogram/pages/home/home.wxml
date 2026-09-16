@@ -1,0 +1,34 @@
+<view class="page" wx:if="{{user}}">
+  <view class="row hero">
+    <view class="hero-copy">
+      <view class="kicker">今日学习</view>
+      <view class="h1">{{user.name}}，把英语放进生活里</view>
+    </view>
+    <view class="chip level-chip">当前 {{user.level}}</view>
+  </view>
+  <view class="card">
+    <view class="muted">像多邻国一样每天打卡，像百词斩一样看图记词。</view>
+    <view class="h1" style="font-size: 36rpx;">今天 {{user.dailyMinutes}} 分钟，够用一个场景。</view>
+    <button class="btn moss" bindtap="goDaily">开始今日训练</button>
+    <button class="btn ghost" style="margin-top: 12rpx;" bindtap="goReview">复习昨天 {{review.yesterdayMissed || 0}} + 到期 {{review.dueCount || 0}}</button>
+    <view class="stats">
+      <view><view class="muted">已学</view><view class="stat">{{progress.learned || 0}}</view></view>
+      <view><view class="muted">较熟</view><view class="stat">{{progress.mastered || 0}}</view></view>
+      <view><view class="muted">连续</view><view class="stat">{{user.streak || 0}}</view></view>
+    </view>
+  </view>
+  <view class="card">
+    <view class="kicker">阶段路径</view>
+    <view class="path">
+      <text wx:for="{{stages}}" wx:key="id" class="stage {{item.done ? 'done' : ''}} {{item.now ? 'now' : ''}}">{{item.id}}</text>
+    </view>
+    <button class="btn ghost" bindtap="goTests">去水平测试</button>
+  </view>
+  <view class="grid">
+    <view class="cell" bindtap="goWords"><view class="emoji">🥕</view><view class="title">分类记忆</view><view class="muted">票据对照、家居脑图，四级到雅思。</view></view>
+    <view class="cell" bindtap="goRoots"><view class="emoji">🧩</view><view class="title">词根词缀</view><view class="muted">看见一块积木就能猜一串词。</view></view>
+    <view class="cell" bindtap="goScenarios"><view class="emoji">✈️</view><view class="title">场景训练</view><view class="muted">20 个生活场景，开口就能用。</view></view>
+    <view class="cell" bindtap="goGrammar"><view class="emoji">📘</view><view class="title">语法专项</view><view class="muted">27 个专题，从 be 动词到虚拟语气。</view></view>
+  </view>
+</view>
+<view class="empty" wx:else>加载中…</view>

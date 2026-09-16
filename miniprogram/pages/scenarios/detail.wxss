@@ -1,0 +1,5 @@
+.bubble { background: #fff; border-radius: 24rpx; padding: 20rpx; margin-bottom: 12rpx; }
+.bubble.you { background: #1e6b48; color: #fff; }
+.bubble.you .muted { color: rgba(255,255,255,.75); }
+button { margin-top: 8rpx; }
+.lemma { font-size: 32rpx; font-weight: 700; }

@@ -1,0 +1,18 @@
+<view class="page" wx:if="{{user}}">
+  <view class="card">
+    <view class="h1">{{user.name}}</view>
+    <view class="muted">{{user.email}} · {{user.level}}</view>
+    <view class="stats">
+      <view><view class="muted">连续</view><view class="stat">{{user.streak || 0}}</view></view>
+      <view><view class="muted">XP</view><view class="stat">{{user.xp || 0}}</view></view>
+      <view><view class="muted">时长</view><view class="stat">{{user.dailyMinutes}}</view></view>
+    </view>
+  </view>
+  <view class="cell" bindtap="goDaily">✅ 每日打卡</view>
+  <view class="cell" bindtap="goReview">🔁 复习队列</view>
+  <view class="cell" bindtap="goPronounce">🎤 发音训练</view>
+  <view class="cell" bindtap="goTests">🎓 水平测试</view>
+  <view class="cell" bindtap="goRoots">🧩 词根词缀</view>
+  <button class="btn ghost" bindtap="logout">退出登录</button>
+</view>
+<view class="empty" wx:else>加载中…</view>
