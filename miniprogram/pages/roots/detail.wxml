@@ -3,6 +3,7 @@
   <view class="h1">{{root.affix}} · {{root.meaning}}</view>
   <view class="muted">{{root.tip || root.description}}</view>
   <button class="btn moss" bindtap="study">开始记这组</button>
+  <button class="btn ghost" bindtap="startQuiz">记忆测试</button>
   <view class="card" wx:for="{{root.examples}}" wx:key="lemma" data-text="{{item.lemma}}" bindtap="play">
     <view class="lemma">{{item.emoji}} {{item.lemma}}</view>
     <view>{{item.meaning}}</view>

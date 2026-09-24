@@ -30,4 +30,12 @@ Page({
   startStudy() {
     wx.navigateTo({ url: `/pages/words/study?kind=category&slug=${this.data.slug}` });
   },
+
+  startQuiz() {
+    if ((this.data.words || []).length < 4) {
+      wx.showToast({ title: "词太少，先记几轮", icon: "none" });
+      return;
+    }
+    wx.navigateTo({ url: `/pages/words/quiz?kind=category&slug=${this.data.slug}` });
+  },
 });

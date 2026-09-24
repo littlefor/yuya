@@ -3,6 +3,7 @@
   <view class="muted">{{meta.description}} 本组 {{words.length}} 个词。</view>
   <view class="chips">
     <button class="btn moss" bindtap="startStudy">开始记这组</button>
+    <button class="btn ghost" bindtap="startQuiz">记忆测试</button>
     <button class="btn ghost" bindtap="speakActive" wx:if="{{active}}">听发音</button>
   </view>
   <scroll-view scroll-y class="sheet">

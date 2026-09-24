@@ -25,6 +25,8 @@ Page({
   async onLoad(query) {
     if (!requireLogin()) return;
     const { kind, slug } = query;
+    this.kind = kind || "category";
+    this.slug = slug || "";
     let words = [];
     if (kind === "root") {
       const data = await request({ path: `/roots/${slug}`, auth: false });
@@ -95,6 +97,12 @@ Page({
       });
     }
     this.show(this.data.index + 1);
+  },
+
+  goQuiz() {
+    wx.redirectTo({
+      url: "/pages/words/quiz?kind=" + (this.kind || "category") + "&slug=" + (this.slug || ""),
+    });
   },
 
   back() { wx.navigateBack(); },

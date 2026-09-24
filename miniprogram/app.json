@@ -7,6 +7,7 @@
     "pages/words/words",
     "pages/words/group",
     "pages/words/study",
+    "pages/words/quiz",
     "pages/roots/roots",
     "pages/roots/detail",
     "pages/scenarios/scenarios",

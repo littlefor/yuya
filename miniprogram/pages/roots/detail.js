@@ -14,4 +14,7 @@ Page({
   study() {
     wx.navigateTo({ url: `/pages/words/study?kind=root&slug=${this.data.slug}` });
   },
+  startQuiz() {
+    wx.navigateTo({ url: `/pages/words/quiz?kind=root&slug=${this.data.slug}` });
+  },
 });

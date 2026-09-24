@@ -171,3 +171,85 @@ contentRouter.get("/practice/quiz", authRequired, async (req, res) => {
     answerId: target._id,
   });
 });
+
+contentRouter.get("/practice/memory-quiz", authRequired, async (req, res) => {
+  const { category, root, cluster } = req.query;
+  const limit = Math.min(20, Math.max(6, Number(req.query.limit) || 10));
+  const filter = {};
+  if (category) filter.categorySlug = category;
+  if (root) filter.rootSlugs = root;
+  let pool = await Word.find(filter).lean();
+  let title = "分类记忆测试";
+  if (root && pool.length < 4) {
+    const rootDoc = await WordRoot.findOne({ slug: root }).lean();
+    if (rootDoc?.examples?.length) {
+      pool = rootDoc.examples.map((w, idx) => ({
+        _id: w._id || `ex-${idx}`,
+        lemma: w.lemma,
+        ipa: w.ipa || "",
+        meaning: w.meaning,
+        emoji: w.emoji || "🧩",
+        example: w.breakdown || "",
+        exampleZh: rootDoc.meaning,
+      }));
+      title = `${rootDoc.affix} 记忆测试`;
+    }
+  }
+  if (category) {
+    const cat = await Category.findOne({ slug: category }).lean();
+    if (cat) title = `${cat.name} 记忆测试`;
+  }
+  if (pool.length < 4) return res.status(400).json({ message: "这组词还不够 4 个，先去记几轮再测。" });
+
+  const targets = cluster ? pool.filter((w) => w.cluster === cluster) : pool;
+  const questionWords = shuffle(targets.length ? targets : pool).slice(0, Math.min(limit, pool.length));
+  const questions = questionWords.map((word, index) => {
+    const type = index % 2 === 0 ? "en2zh" : "zh2en";
+    const id = String(word._id);
+    if (type === "en2zh") {
+      const others = shuffle(
+        pool.filter((w) => String(w._id) !== id && w.meaning !== word.meaning).map((w) => w.meaning)
+      ).slice(0, 3);
+      const options = shuffle([word.meaning, ...others]);
+      return {
+        wordId: word._id,
+        lemma: word.lemma,
+        ipa: word.ipa,
+        emoji: word.emoji,
+        meaning: word.meaning,
+        example: word.example || "",
+        exampleZh: word.exampleZh || "",
+        type,
+        prompt: `“${word.lemma}” 的中文是？`,
+        options,
+        answer: options.indexOf(word.meaning),
+      };
+    }
+    const others = shuffle(
+      pool.filter((w) => String(w._id) !== id && w.lemma !== word.lemma).map((w) => w.lemma)
+    ).slice(0, 3);
+    const options = shuffle([word.lemma, ...others]);
+    return {
+      wordId: word._id,
+      lemma: word.lemma,
+      ipa: word.ipa,
+      emoji: word.emoji,
+      meaning: word.meaning,
+      example: word.example || "",
+      exampleZh: word.exampleZh || "",
+      type,
+      prompt: `“${word.meaning}” 对应哪个英文词？`,
+      options,
+      answer: options.indexOf(word.lemma),
+    };
+  });
+
+  res.json({
+    title,
+    slug: category || root || "",
+    kind: root ? "root" : "category",
+    total: questions.length,
+    passScore: 70,
+    questions,
+  });
+});

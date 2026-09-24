@@ -86,6 +86,13 @@ export function WordGroupPage() {
         <button className={view === "list" ? "btn moss" : "btn ghost"} onClick={() => setView("list")}>对照词表</button>
         <button className={view === "map" ? "btn moss" : "btn ghost"} onClick={() => setView("map")}>主题脑图</button>
         <button className="btn" onClick={() => nav(`/study/${kind}/${slug}${cluster ? `?cluster=${cluster}` : ""}`)}>开始记这组</button>
+        <button
+          className="btn moss"
+          disabled={visible.length < 4}
+          onClick={() => nav(`/memory-quiz/${kind}/${slug}${cluster ? `?cluster=${cluster}` : ""}`)}
+        >
+          记忆测试
+        </button>
       </div>
       {clusters.length > 1 ? (
         <div className="btn-group" style={{ marginTop: 12 }}>
@@ -215,6 +222,7 @@ export function RootDetailPage() {
       <div className="btn-group">
         <Link className="btn ghost" to="/roots">返回总脑图</Link>
         <button className="btn moss" onClick={() => nav(`/study/root/${root.slug}`)}>开始记这组例词</button>
+        <button className="btn" disabled={(root.examples || []).length < 4} onClick={() => nav(`/memory-quiz/root/${root.slug}`)}>记忆测试</button>
       </div>
       <div className="mindmap-board" style={{ marginTop: 18 }}>
         <div className="mindmap-center" style={{ borderColor: root.color }}>
@@ -312,8 +320,11 @@ export function StudyPage() {
     return (
       <div className="card">
         <h1>本组词已经过完一遍</h1>
-        <p>答对 {done} 个。明天会按间隔重复出现。</p>
-        <Link className="btn moss" to="/review">去复习队列</Link>
+        <p>答对 {done} 个。接着做一轮记忆测试，会更牢。</p>
+        <div className="btn-group">
+          <Link className="btn moss" to={`/memory-quiz/${kind}/${slug}${cluster ? `?cluster=${cluster}` : ""}`}>去做记忆测试</Link>
+          <Link className="btn ghost" to="/review">去复习队列</Link>
+        </div>
       </div>
     );
   }

@@ -1,0 +1,41 @@
+<view class="page" wx:if="{{quiz && !done}}">
+  <view class="kicker">{{quiz.title}}</view>
+  <view class="muted">{{index + 1}} / {{quiz.total}} · {{qTypeLabel}} · 已对 {{correct}}</view>
+  <view class="card">
+    <view class="emoji">{{question.emoji}}</view>
+    <view class="prompt">{{question.prompt}}</view>
+    <button wx:if="{{question.type === 'en2zh' || picked != null}}" class="btn ghost" bindtap="play">听发音</button>
+    <button
+      wx:for="{{options}}"
+      wx:key="text"
+      class="option {{item.klass}}"
+      data-index="{{item.index}}"
+      bindtap="choose"
+    >{{item.text}}</button>
+    <view wx:if="{{picked != null}}" class="muted">{{feedback}}</view>
+    <button wx:if="{{picked != null}}" class="btn moss" bindtap="next">{{nextLabel}}</button>
+  </view>
+</view>
+<view class="page" wx:elif="{{done}}">
+  <view class="card">
+    <view class="kicker">{{passed ? '记得不错' : '再过一遍会更牢'}}</view>
+    <view class="h1">{{quiz.title}}</view>
+    <view class="score">{{score}}</view>
+    <view>答对 {{correct}} / {{quiz.total}}</view>
+    <view class="muted">错题会更快进入复习队列。</view>
+    <view class="miss" wx:for="{{missed}}" wx:key="lemma">
+      <view class="card">
+        <view class="lemma">{{item.lemma}}</view>
+        <view>{{item.meaning}}</view>
+      </view>
+    </view>
+    <button class="btn moss" bindtap="retry">再测一轮</button>
+    <button class="btn ghost" bindtap="back">返回词表</button>
+  </view>
+</view>
+<view class="card" wx:elif="{{error}}">
+  <view class="h1">还不能开测</view>
+  <view>{{error}}</view>
+  <button class="btn moss" bindtap="back">返回</button>
+</view>
+<view class="empty" wx:else>出题中…</view>

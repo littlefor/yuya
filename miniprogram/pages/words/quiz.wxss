@@ -1,0 +1,4 @@
+.score { font-size: 72rpx; font-weight: 700; margin: 8rpx 0; }
+.prompt { font-size: 36rpx; font-weight: 700; margin: 12rpx 0 20rpx; }
+.emoji { font-size: 64rpx; }
+.miss { margin-top: 16rpx; }

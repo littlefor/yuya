@@ -4,6 +4,7 @@ import { Layout } from "./Layout.jsx";
 import { LoginPage, RegisterPage } from "./pages/AuthPages.jsx";
 import { HomePage } from "./pages/HomePage.jsx";
 import { RootsPage, RootDetailPage, StudyPage, WordGroupPage, WordsPage } from "./pages/WordPages.jsx";
+import { MemoryQuizPage } from "./pages/MemoryQuizPage.jsx";
 import { GrammarDetailPage, GrammarPage, PronouncePage, ScenarioDetailPage, ScenariosPage } from "./pages/PracticePages.jsx";
 import { DailyPage, ReviewPage } from "./pages/DailyPages.jsx";
 import { TestRunPage, TestsPage } from "./pages/TestPages.jsx";
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="words" element={<WordsPage />} />
         <Route path="words/:slug" element={<WordGroupPage />} />
         <Route path="study/:kind/:slug" element={<StudyPage />} />
+        <Route path="memory-quiz/:kind/:slug" element={<MemoryQuizPage />} />
         <Route path="roots" element={<RootsPage />} />
         <Route path="roots/:slug" element={<RootDetailPage />} />
         <Route path="scenarios" element={<ScenariosPage />} />

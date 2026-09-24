@@ -23,6 +23,8 @@
 <view class="card" wx:elif="{{loaded}}">
   <view class="h1">本组练完了</view>
   <view>答对 {{done}} / {{words.length}}</view>
-  <button class="btn moss" bindtap="back">返回</button>
+  <view class="muted">接着做一轮记忆测试，会更牢。</view>
+  <button class="btn moss" bindtap="goQuiz">去做记忆测试</button>
+  <button class="btn ghost" bindtap="back">返回</button>
 </view>
 <view class="empty" wx:else>加载中…</view>
